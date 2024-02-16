@@ -1,93 +1,136 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <ControlTemplate x:Key="TemplateButton" TargetType="{x:Type Button}">
-                <Border CornerRadius="15"
-                        BorderBrush="{TemplateBinding Property=BorderBrush}"
-                        BorderThickness="{TemplateBinding Property=BorderThickness}"
-                        Background="{TemplateBinding Property=Background}"
-                        Height="{TemplateBinding Property=Height}"
-                        Width="{TemplateBinding Property=Width}"
-                        Margin="{TemplateBinding Property=Margin}">
-                    <ContentControl Content="{TemplateBinding Property=Content}"
-                                    HorizontalAlignment="{TemplateBinding Property=HorizontalContentAlignment}"
-                                    VerticalAlignment="{TemplateBinding Property=VerticalContentAlignment}"
-                                    Margin="{TemplateBinding Property=Padding}"
-                                    Foreground="{TemplateBinding Property=Foreground}"
-                                    FontSize="{TemplateBinding Property=FontSize}"
-                                    FontWeight="{TemplateBinding Property=FontWeight}"/>
-                </Border>
-            </ControlTemplate>
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
+    <sys:Double x:Key="ButtonWidthStart">275</sys:Double>
+    <sys:Double x:Key="ButtonWidthEnd">300</sys:Double>
+    
+    <sys:Double x:Key="ButtonHeightStart">100</sys:Double>
+    <sys:Double x:Key="ButtonHeightMedium">125</sys:Double>
+    <sys:Double x:Key="ButtonHeightEnd">150</sys:Double>
+    
+    <Color x:Key="ColorStart">Red</Color>
+    <Color x:Key="ColorEnd">Magenta</Color>
+    
+    <ControlTemplate x:Key="TemplateButton" TargetType="{x:Type TypeName=Button}">
+        <Border CornerRadius="15"
+                BorderBrush="{TemplateBinding Property=BorderBrush}"
+                BorderThickness="{TemplateBinding Property=BorderThickness}"
+                Background="{TemplateBinding Property=Background}"
+                Margin="{TemplateBinding Property=Margin}">
+            <ContentControl Content="{TemplateBinding Property=Content}"
+                            HorizontalAlignment="{TemplateBinding Property=HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding Property=VerticalContentAlignment}"
+                            Margin="{TemplateBinding Property=Padding}"
+                            Foreground="{TemplateBinding Property=Foreground}"
+                            FontSize="{TemplateBinding Property=FontSize}"
+                            FontWeight="{TemplateBinding Property=FontWeight}" />
+        </Border>
+    </ControlTemplate>
+
+    <Style x:Key="StyleLabelStatus" TargetType="{x:Type TypeName=Label}">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10" />
+    </Style>
+
+    <Style x:Key="StyleButtonBase" TargetType="{x:Type TypeName=Button}">
+        <Style.Setters>
+            <Setter Property="Width" Value="{StaticResource ResourceKey=ButtonWidthStart}" />
+            <Setter Property="Height" Value="{StaticResource ResourceKey=ButtonHeightStart}" />
+
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="15" />
+
+            <Setter Property="BorderThickness" Value="0" />
+
+            <Setter Property="Foreground" Value="White" />
+
+            <Setter Property="FontSize" Value="25" />
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="FontWeight" Value="Heavy" />
+            </Trigger>
             
-            <Style x:Key="StyleLabelStatus" TargetType="{x:Type Label}">
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                <Setter Property="Margin" Value="10"/>
-            </Style>
-            
-            <Style x:Key="StyleButtonBase" TargetType="{x:Type Button}">
-                <Style.Setters>
-                    <Setter Property="Width" Value="275"/>
-                
-                    <Setter Property="Margin" Value="10"/>
-                    <Setter Property="Padding" Value="15"/>
-                
-                    <Setter Property="BorderThickness" Value="0"/>
-                
-                    <Setter Property="Foreground" Value="White"/>
-                
-                    <Setter Property="FontSize" Value="25"/>
-                </Style.Setters>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="FontWeight" Value="Heavy"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-            <Style x:Key="StyleButtonOpen" TargetType="{x:Type Button}"
-                   BasedOn="{StaticResource StyleButtonBase}">
-                <Style.Setters>
-                    <Setter Property="Background" Value="DarkBlue"/>
-                </Style.Setters>
-                
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="Blue"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-            <Style x:Key="StyleButtonPlay" TargetType="{x:Type Button}"
-                   BasedOn="{StaticResource StyleButtonBase}">
-                <Style.Setters>
-                    <Setter Property="Background" Value="DarkGreen"/>
-                </Style.Setters>
-                
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="Green"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-            <Style x:Key="StyleButtonPause" TargetType="{x:Type Button}"
-                   BasedOn="{StaticResource StyleButtonBase}">
-                <Style.Setters>
-                    <Setter Property="Background" Value="DarkOrange"/>
-                </Style.Setters>
-                
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="Orange"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-            <Style x:Key="StyleButtonStop" TargetType="{x:Type Button}"
-                   BasedOn="{StaticResource StyleButtonBase}">
-                <Style.Setters>
-                    <Setter Property="Background" Value="DarkRed"/>
-                </Style.Setters>
-                
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="Red"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Width"
+                                             From="{StaticResource ResourceKey=ButtonWidthStart}"
+                                             To="{StaticResource ResourceKey=ButtonWidthEnd}"
+                                             Duration="0:0:0.75" AutoReverse="True"
+                                             RepeatBehavior="Forever"/>
+                            
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Height"
+                                                           Duration="0:0:0.75" AutoReverse="True"
+                                                           RepeatBehavior="2x">
+                                <LinearDoubleKeyFrame KeyTime="0%" Value="{StaticResource ResourceKey=ButtonHeightStart}"/>
+                                <LinearDoubleKeyFrame KeyTime="50%" Value="{StaticResource ResourceKey=ButtonHeightMedium}"/>
+                                <LinearDoubleKeyFrame KeyTime="100%" Value="{StaticResource ResourceKey=ButtonHeightEnd}"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Background.Color"
+                                                          Duration="0:0:1.5">
+                                <LinearColorKeyFrame KeyTime="0:0:0.25" Value="{StaticResource ColorStart}"/>
+                                <LinearColorKeyFrame KeyTime="0:0:0.75" Value="{StaticResource ColorEnd}"/>
+                            </ColorAnimationUsingKeyFrames>
+                            
+                            <DoubleAnimation Storyboard.TargetProperty="Background.Opacity"
+                                             From="1" To="0"
+                                             Duration="0:0:2" AutoReverse="True"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="StyleButtonOpen" TargetType="{x:Type TypeName=Button}"
+           BasedOn="{StaticResource ResourceKey=StyleButtonBase}">
+        <Style.Setters>
+            <Setter Property="Background" Value="DarkBlue" />
+        </Style.Setters>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Blue" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="StyleButtonPlay" TargetType="{x:Type TypeName=Button}"
+           BasedOn="{StaticResource ResourceKey=StyleButtonBase}">
+        <Style.Setters>
+            <Setter Property="Background" Value="DarkGreen" />
+        </Style.Setters>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Green" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="StyleButtonPause" TargetType="{x:Type TypeName=Button}"
+           BasedOn="{StaticResource ResourceKey=StyleButtonBase}">
+        <Style.Setters>
+            <Setter Property="Background" Value="DarkOrange" />
+        </Style.Setters>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Orange" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="StyleButtonStop" TargetType="{x:Type TypeName=Button}"
+           BasedOn="{StaticResource ResourceKey=StyleButtonBase}">
+        <Style.Setters>
+            <Setter Property="Background" Value="DarkRed" />
+        </Style.Setters>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Red" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

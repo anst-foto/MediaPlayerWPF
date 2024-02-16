@@ -1,12 +1,50 @@
 ﻿<Window x:Class="MediaPlayerWPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MediaPlayerWPF"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="MediaPlayerWPF" 
+        WindowState="Maximized" WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <ResourceDictionary Source="MainWindowStyles.xaml"/>
+    </Window.Resources>
+    
+    <StackPanel>
+        <MediaElement x:Name="Player"
+                      HorizontalAlignment="Center"
+                      Width="800"
+                      LoadedBehavior="Manual"/>
+        
+        <Label x:Name="LabelStatus" Content="Не выбран файл..."
+               Style="{StaticResource ResourceKey=StyleLabelStatus}"/>
+        <Slider x:Name="Position" 
+                Minimum="0" 
+                ValueChanged="Position_OnValueChanged"/>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="ButtonOpen"
+                    Content="Выбрать файл..."
+                    Template="{StaticResource ResourceKey=TemplateButton}"
+                    Style="{StaticResource ResourceKey=StyleButtonOpen}"
+                    Click="ButtonOpen_OnClick"/>
+            <Button x:Name="ButtonPlay"
+                    Content="Воспроизвести"
+                    Template="{StaticResource ResourceKey=TemplateButton}"
+                    Style="{StaticResource ResourceKey=StyleButtonPlay}"
+                    Click="ButtonPlay_OnClick"/>
+            <Button x:Name="ButtonPause"
+                    Content="Пауза"
+                    Template="{StaticResource ResourceKey=TemplateButton}"
+                    Style="{StaticResource ResourceKey=StyleButtonPause}"
+                    Click="ButtonPause_OnClick"/>
+            <Button x:Name="ButtonStop"
+                    Content="Стоп"
+                    Template="{StaticResource ResourceKey=TemplateButton}"
+                    Style="{StaticResource ResourceKey=StyleButtonStop}"
+                    Click="ButtonStop_OnClick"/>
+            <Slider Orientation="Vertical"
+                    Minimum="0"
+                    Maximum="1"
+                    ValueChanged="Volume_OnValueChanged"/>
+        </StackPanel>
+    </StackPanel>
 </Window>

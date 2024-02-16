@@ -10,4 +10,3 @@ namespace MediaPlayerWPF;
 public partial class App : Application
 {
 }
-
